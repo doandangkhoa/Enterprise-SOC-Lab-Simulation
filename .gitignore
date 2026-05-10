@@ -1,0 +1,12 @@
+# Joplin system folders
+.resource/
+.sync/
+.lock/
+locks/
+temp/
+info.json
+*.jex
+
+# OS metadata
+.DS_Store
+Thumbs.db
