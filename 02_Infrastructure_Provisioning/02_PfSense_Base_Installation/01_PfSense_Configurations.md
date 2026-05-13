@@ -1,6 +1,4 @@
-## Sau khi đã cài đặt xog máy ảo pfsense
-
-### 🚀 Giai đoạn 2: Cấu hình pfSense qua Console
+# Cấu hình pfSense qua Console
 
 **Bước 1: Bật máy ảo pfSense lên.**
 
@@ -63,19 +61,19 @@
     7.  `Do you want to enable the DHCP server on OPT1?` -> Gõ **`y`**, nhập dải từ `172.16.10.100` đến `172.16.10.200`.
         
 
-## Bật pfSense Firewall rồi mở Windows Host, truy cập vào Internet rồi Search : `https://192.168.10.1` sẽ hiện ra trang web để cấu hình firewall
+# Cấu hình Pfsense trên giao diện Web
 
-<img src="../../_resources/925321fe98e06c3fadc54e2b5e819bfe.png" alt="925321fe98e06c3fadc54e2b5e819bfe.png" width="1172" height="550" class="jop-noMdConv">
+### Bật pfSense Firewall rồi mở Windows Host, truy cập vào Internet rồi Search : `https://192.168.10.1` sẽ hiện ra trang web để cấu hình firewall
 
-## **Thiết lập Timezone** và đảm bảo các thiết bị khác cũng có cùng TimeZone này.
+<img src="../../_resources/925321fe98e06c3fadc54e2b5e819bfe.png" alt="925321fe98e06c3fadc54e2b5e819bfe.png" width="1027" height="482" class="jop-noMdConv">
 
-<img src="../../_resources/4f48e5cacee18313cee8a34eabd8da48.png" alt="4f48e5cacee18313cee8a34eabd8da48.png" width="1179" height="521" class="jop-noMdConv">
+### **Thiết lập Timezone** và đảm bảo các thiết bị khác cũng có cùng TimeZone này.
 
-### \--> Bấm Next
+<img src="../../_resources/66bf4a043e81945f64c159b0c136542a.png" alt="66bf4a043e81945f64c159b0c136542a.png" width="977" height="230">
 
-## **Tiếp theo tới phần Setup cho WAN Interface**
+### **Tiếp theo tới phần Setup cho WAN Interface**
 
-![d63a7247c9781a984503878286959311.png](../../_resources/d63a7247c9781a984503878286959311.png)
+<img src="../../_resources/d63a7247c9781a984503878286959311.png" alt="d63a7247c9781a984503878286959311.png" width="973" height="213">
 
 bỏ tích 2 ô này:
 
@@ -87,25 +85,25 @@ bỏ tích 2 ô này:
 - **Block bogon networks:** Chặn các IP "ma" (chưa được đăng ký hoặc không tồn tại trên bản đồ Internet thế giới).
     
 
-Tuy nhiên để thuận tiện cho việc thử nghiệm, giả sử như các điều trên sẽ mặc định được thỏa mãn. --> **Bấm Next**
+Tuy nhiên để thuận tiện cho việc thử nghiệm, giả sử như các điều trên sẽ mặc định được thỏa mãn.
 
-# **ConFigure LAN Interface**
+### **Trong phần System / Advanced / Networking**
 
-![3e12f3e196ba8065e3ca9b8457ab5908.png](../../_resources/3e12f3e196ba8065e3ca9b8457ab5908.png)
+Đảm bảo tích chọn 3 ô này:
 
-`192.168.10.1`là default Gateway
+**<img src="../../_resources/b94428a4e4ac4c87b2499a317c6fdc54.png" alt="b94428a4e4ac4c87b2499a317c6fdc54.png" width="884" height="242">**
 
-Chúng ta sử dụng mặt nạ mạng 24, có nghĩa **IP network** là: `192.168.10.0/24`
+### **Trong phần Status / System Logs / Settings**
 
-<img src="../../_resources/458457e870e694c3badf898a3e03a028.png" alt="458457e870e694c3badf898a3e03a028.png" width="907" height="427" class="jop-noMdConv">
+Đảm bảo chọn `Enable Remote Logging` để pfsense tiến hành gửi **syslog** tới wazuh manager trên địa chỉ đã chọn:
 
-Tiếp tục bấm Next cho tới đây là đã hoàn thành.
+**<img src="../../_resources/e8782dc50004d208b138c2f723943e2d.png" alt="e8782dc50004d208b138c2f723943e2d.png" width="858" height="575">**
 
 # Setup rules cho vùng DMZ
 
 `Firewall --> Rule --> OTP1`
 
-## 🧱 Setup 3 Rule cho vùng DMZ (Theo thứ tự Top-Down)
+## Setup 3 Rule cho vùng DMZ (Theo thứ tự Top-Down)
 
 #### 🟢 Rule 1: Mở đường cho Wazuh (Nằm trên cùng)
 
@@ -135,7 +133,7 @@ Tiếp tục bấm Next cho tới đây là đã hoàn thành.
     
     - <img src="../../_resources/b4cb81cb2a5b6e38e8b3c911dc152267.png" alt="b4cb81cb2a5b6e38e8b3c911dc152267.png" width="830" height="721" class="jop-noMdConv">
 
-#### 🔴 Rule 2: Cấm DMZ "leo rào" vào LAN (Nằm giữa)
+#### 🔴 Rule 2: Cấm DMZ vào LAN (Nằm giữa)
 
 1.  Nhấn nút **Add** (nút có mũi tên hướng xuống ⬇️, để nó xếp dưới Rule 1).
     
@@ -179,10 +177,14 @@ Tiếp tục bấm Next cho tới đây là đã hoàn thành.
     
     - <img src="../../_resources/a6d8d1291a04bb146284e51cc0212cb5.png" alt="a6d8d1291a04bb146284e51cc0212cb5.png" width="818" height="611" class="jop-noMdConv">
 
-## Kết quả
+### Kết quả
 
-- <img src="../../_resources/2a79977bea280cf0c7ef8e53829d738e.png" alt="2a79977bea280cf0c7ef8e53829d738e.png" width="856" height="335" class="jop-noMdConv">
+- - <img src="../../_resources/2a79977bea280cf0c7ef8e53829d738e.png" alt="2a79977bea280cf0c7ef8e53829d738e.png" width="856" height="335" class="jop-noMdConv">
 
-&nbsp;
+# Setup Rules cho vùng LAN
 
-# Configure rule cho vùng WAN
+- - <img src="../../_resources/9377642c8e8f76887c4440ae68ad6a66.png" alt="9377642c8e8f76887c4440ae68ad6a66.png" width="858" height="297" class="jop-noMdConv">
+
+# Setup Rules cho vùng WAN
+
+- - <img src="../../_resources/f034d036b1344ca4a56c831803570396.png" alt="f034d036b1344ca4a56c831803570396.png" width="877" height="231" class="jop-noMdConv"> - <img src="../../_resources/da00b38df148b8753b394bb1042a5a65.png" alt="da00b38df148b8753b394bb1042a5a65.png" width="878" height="852" class="jop-noMdConv">

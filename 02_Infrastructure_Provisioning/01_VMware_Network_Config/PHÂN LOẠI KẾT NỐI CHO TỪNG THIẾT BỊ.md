@@ -99,7 +99,7 @@ thay đổi vmnet3: `sudo ip addr flush dev vmnet3 && sudo ip addr add 172.16.10
 
 **Bước 2:** Viết cấu hình cho vmnet2 và vmnet3
 
-Bạn di chuyển con trỏ xuống dưới cùng và thêm đoạn cấu hình cho 2 card ảo này vào. Hãy **dùng phím Space (dấu cách) để lùi đầu dòng**, tuyệt đối không dùng phím Tab:
+Bạn di chuyển con trỏ xuống dưới cùng và thêm đoạn cấu hình cho 2 card ảo này vào. Hãy **dùng phím Space để lùi đầu dòng**, tuyệt đối không dùng phím Tab:
 
 ```
 network:
