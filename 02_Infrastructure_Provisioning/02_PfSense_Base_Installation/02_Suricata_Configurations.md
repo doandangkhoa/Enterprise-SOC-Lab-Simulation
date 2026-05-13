@@ -4,28 +4,28 @@
 
 <img src="../../_resources/5ac48f2588ad65f4dee4601a2b650778.png" alt="5ac48f2588ad65f4dee4601a2b650778.png" width="1069" height="503" class="jop-noMdConv">
 
-**Bấm Install và chờ cho tới chi Suricata được cài đặt xog.**
+Bấm Install và chờ cho tới chi Suricata được cài đặt xog.
 
 **<img src="../../_resources/0db0748cc0dec42c870daba4fbca48a2.png" alt="0db0748cc0dec42c870daba4fbca48a2.png" width="1073" height="505" class="jop-noMdConv">**
 
-**Đến đây, tạm thời chúng ta đã hoàn thành việc cấu hình Suricata. Tuy nhiên, sẽ chưa có luật nào được áp dụng cho tới khi chung ta cấu hình cho nó.**
+Đến đây, tạm thời chúng ta đã hoàn thành việc cấu hình Suricata. Tuy nhiên, sẽ chưa có luật nào được áp dụng cho tới khi chung ta cấu hình cho nó.
 
 ### 🛠️ Việc cần làm để Suricata bắt đầu hoạt động:
 
-**Bước 1: Tải "Danh sách tội phạm" (Global Rules)**
+**Bước 1: Tải Global Rules**
 
 1.  Trên menu chính của pfSense, vào **Services** ➡️ **Suricata**.
     
 2.  Chọn tab **Global Settings**.
     
-3.  Kéo xuống mục **Install ETOpen Free Emerging Threats rules**, tích vào ô **`Enable`**. (Đây là bộ luật miễn phí cực xịn cho giới SOC).
+3.  Kéo xuống mục **Install ETOpen Free Emerging Threats rules**, tích vào ô **`Enable`**.
     
-4.  Bạn có thể tích thêm **`Enable Snort VRT`** nếu có code, nhưng tạm thời cứ dùng **ETOpen** là đủ phê rồi.
+4.  Bạn có thể tích thêm **`Enable Snort VRT`** nếu có code, nhưng tạm thời cứ dùng **ETOpen** là đủ rồi.
     
 5.  Kéo xuống dưới cùng bấm **Save**.
     
 
-**Bước 2: Cập nhật Rules (Đổ dữ liệu vào máy)**
+**Bước 2: Cập nhật Rules**
 
 1.  Chuyển sang tab **Updates**.
     
@@ -36,31 +36,31 @@
 
 1.  Chuyển sang tab **Interfaces**.
     
-2.  Bấm nút **`Add`** (hình dấu cộng).
+2.  Bấm nút **`Add`.**
     
-3.  Ở mục **Interface**, chọn **LAN** (để giám sát lưu lượng đi vào mạng nội bộ của bạn).
+3.  Ở mục **Interface**, chọn **LAN** (để giám sát lưu lượng đi vào mạng nội bộ).
     
 4.  Ở mục **Description**, ghi: `LAN Security Monitoring`.
     
 5.  Tích chọn thêm ô `Send Alerts to System Log`
     
-    - ![6fc7429f277292698b9503f0fc307f0b.png](../../_resources/6fc7429f277292698b9503f0fc307f0b.png)
-    - **Log Facility (LOCAL1):** Đây là "kênh" để Suricata đẩy log vào hệ thống FreeBSD của pfSense. `LOCAL1` là giá trị tiêu chuẩn, không cần thay đổi trừ khi bạn có một hệ thống ghi log cực kỳ phức tạp.
+    - <img src="../../_resources/d989804b0eb249a4e4022e3cfdee9906.png" alt="d989804b0eb249a4e4022e3cfdee9906.png" width="763" height="304" class="jop-noMdConv">
+    - **Log Facility (LOCAL0):** Đây là kênh để Suricata đẩy log vào hệ thống FreeBSD của pfSense.
     - **Log Priority (NOTICE):** Mức độ ưu tiên này giúp lọc các thông báo. `NOTICE` là mức vừa phải, đủ để ghi lại các sự kiện quan trọng mà không làm rác file log.
 6.  Bấm **Save**.
     
 
-<img src="../../_resources/2f414397a05f895e507177c4e434b9a5.png" alt="2f414397a05f895e507177c4e434b9a5.png" width="970" height="441" class="jop-noMdConv">
+<img src="../../_resources/2f414397a05f895e507177c4e434b9a5.png" alt="2f414397a05f895e507177c4e434b9a5.png" width="812" height="369" class="jop-noMdConv">
 
 Đến đây là hoàn thành việc cài đặt Suricata.
 
 ## Testing
 
-Máy chủ kali thực hiện : nmap -sV 192.168.10.1
+Máy chủ kali thực hiện lệnh : `nmap -sV 192.168.10.1`
 
 Kết quả trên suricata:
 
-<img src="../../_resources/c14d83bbc1c323d5a9d82229723ffded.png" alt="c14d83bbc1c323d5a9d82229723ffded.png" width="921" height="453" class="jop-noMdConv">
+<img src="../../_resources/c14d83bbc1c323d5a9d82229723ffded.png" alt="c14d83bbc1c323d5a9d82229723ffded.png" width="791" height="389" class="jop-noMdConv">
 
 &nbsp;
 
@@ -68,7 +68,7 @@ Kết quả trên suricata:
 
 Để làm điều này, chúng ta sẽ tạo một "kịch bản" nhỏ (script) để Linux tự động chạy lệnh `chmod a+rw /dev/vmnet*` mỗi khi hệ thống khởi động lên.
 
-**Bước 1: Tạo file cấu hình (Service) mới** Gõ lệnh này để tạo và mở một file service mới tên là `vmware-promiscuous.service`: 
+**Bước 1: Tạo file cấu hình (Service) mới** Gõ lệnh này để tạo và mở một file service mới tên là `vmware-promiscuous.service`:
 
 ```
 sudo nano /etc/systemd/system/vmware-promiscuous.service

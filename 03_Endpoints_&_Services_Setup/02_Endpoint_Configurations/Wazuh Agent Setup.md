@@ -2,7 +2,7 @@
 
 **Bước 1: Cài Agent** Bạn lên giao diện Wazuh, vào mục **Agents -> Deploy new agent**, chọn đúng Hệ điều hành của máy chạy XAMPP, nhập IP của Wazuh Server. Sau đó copy lệnh và dán vào máy XAMPP để cài.
 
-**<img src="../../_resources/2f81f8b5f5be09436f24b12bfec2534e.png" alt="2f81f8b5f5be09436f24b12bfec2534e.png" width="999" height="523">**
+**<img src="../../_resources/2f81f8b5f5be09436f24b12bfec2534e.png" alt="2f81f8b5f5be09436f24b12bfec2534e.png" width="856" height="448" class="jop-noMdConv">**
 
 **Bước 2: Cấu hình cho Wazuh đọc Log XAMPP** Sau khi cài xong, bạn mở file cấu hình của Agent (`ossec.conf` trên máy XAMPP) và thêm đoạn này vào để nó theo dõi log của Apache:
 
